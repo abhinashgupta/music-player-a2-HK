@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="player">
+    <h1>Music Player</h1>
+
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search...">
+      <button class="search-button" (click)="search()">Search</button>
+    </div>
+
+    <div *ngIf="currentTrack">
+      <h2>{{ currentTrack.name }}</h2>
+      <p>{{ currentTrack.artists[0].name }} - {{ currentTrack.album.name }}</p>
+      <p>Duration: {{ getTrackDuration(currentTrack.duration_ms) }}</p>
+    </div>
+
+    <audio controls id="audioPlayer" style="display: none;"></audio>
+
+    <div class="progress">
+      <input type="range" [value]="currentTime" [max]="duration" (input)="onProgressChange($event)">
+      <span>{{ getTrackDuration(currentTime * 1000) }} / {{ getTrackDuration(duration * 1000) }}</span>
+    </div>
+
+    <div class="controls">
+      <button class="control-button" (click)="play()">Play</button>
+      <button class="control-button" (click)="pause()">Pause</button>
+      <button class="control-button" (click)="skip()">Skip</button>
+      <button class="control-button" (click)="shuffle()">{{ isShuffled ? 'Unshuffle' : 'Shuffle' }}</button>
+    </div>
+
+    <div class="volume-control">
+      <label for="volume">Volume:</label>
+      <input type="range" id="volume" name="volume" min="0" max="1" step="0.01" [(ngModel)]="volume" (input)="updateVolume()">
+    </div>
+
+    <div class="playlist-link">
+      <button class="playlist-button" (click)="goToPlaylistManager()">Show & Create Playlist</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="playlist-manager">
+  <h2>Manage Playlists</h2>
+
+  <div class="create-playlist">
+    <h3>Create New Playlist</h3>
+    <input type="text" [(ngModel)]="newPlaylistName" placeholder="Playlist Name">
+    <textarea [(ngModel)]="newPlaylistDescription" placeholder="Playlist Description"></textarea>
+    <button (click)="createPlaylist()">Create</button>
+  </div>
+
+  <div class="user-playlists">
+    <h3>Your Playlists</h3>
+    <ul>
+      <li *ngFor="let playlist of playlists">
+        {{ playlist?.name || 'Unnamed Playlist' }}
+      </li>
+    </ul>
+  </div>
+</div>
